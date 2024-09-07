@@ -1,3 +1,27 @@
+/* @font-face {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  src: url("../../vendors/fonts/CabinetGrotesk-Light.otf");
+}
+
+@font-face {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  src: url("./fonts/Inter-Regular.woff2") format("woff2"),
+    url("./fonts/Inter-Regular.woff") format("woff");
+} */
+
+@font-face {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  src: url("../../vendors/fonts/woff2/CabinetGrotesk-Medium.woff2")
+      format("woff2"),
+    url("../../vendors/fonts/woff/CabinetGrotesk-Medium.woff") format("woff");
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -16,8 +40,29 @@
 }
 
 .modal__title {
-  margin: 0;
+  margin: 0 0 24px 0;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
 }
+
+.modal__label {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 8px;
+}
+
+.modal__legend_title {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 12px;
+}
+
 .modal__close {
   position: absolute;
   top: 20px;
@@ -30,6 +75,7 @@
   max-width: 496px;
   box-sizing: border-box;
   width: 100%;
+  border-radius: 20px;
 }
 
 .modal__form {
@@ -38,13 +84,39 @@
   width: 100%;
 }
 
-.modal__input {
-  display: block;
-}
-
 .modal__radio-buttons {
   border: none;
   padding: 0;
   display: flex;
   flex-direction: column;
+}
+
+.modal__input {
+  display: block;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  width: 100%;
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  margin-bottom: 24px;
+}
+
+.modal__label-type-radio {
+  color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+.modal__radio-input {
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.modal__radio-input:checked + .modal__label-type-radio {
+  color: rgba(0, 0, 0, 1);
 }
