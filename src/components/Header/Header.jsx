@@ -1,15 +1,3 @@
-// import "./App.css";
-
-// function App() {
-//   return (
-//     <div className="app">
-//       <div className="app__wrapper"></div>Hello
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";

@@ -1,4 +1,37 @@
-/* .modal__image {
-  width: 100px;
-  height: 100px;
-} */
+.modal__content_type_image {
+  margin: 0;
+  padding: 0;
+  max-width: 498px;
+  height: 610px;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 20px;
+}
+
+.modal__close_white {
+  background-color: transparent;
+  background-image: url("../../assets/close-button-white.png");
+}
+
+.modal__image {
+  width: 100%;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.modal__footer {
+  font-family: "Cabinet Grotesk", sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  padding: 25px 32px 32px 32px;
+}
+
+.modal__caption {
+  font-size: 20px;
+  margin: 0 0 12px 0;
+}
+
+.modal__weather {
+  margin: 0;
+}

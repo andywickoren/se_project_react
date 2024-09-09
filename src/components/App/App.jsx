@@ -34,7 +34,6 @@ function App() {
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
-        // debugger;
       })
       .catch(console.error);
   }, []);
@@ -74,6 +73,7 @@ function App() {
           id="imageUrl"
           placeholder="Image URL"
         />
+
         <fieldset className="modal__radio-buttons">
           <legend className="modal__legend_title">
             Select the weather type:
@@ -84,7 +84,7 @@ function App() {
             className="modal__label modal__label-type-radio"
           >
             <input type="radio" className="modal__radio-input" />
-            Hot
+            <span className="modal__span">Hot</span>
           </label>
           <label
             id="warm"
@@ -92,7 +92,7 @@ function App() {
             className="modal__label modal__label-type-radio"
           >
             <input type="radio" className="modal__radio-input" />
-            Warm
+            <span className="modal__span">Warm</span>
           </label>
           <label
             id="cold"
@@ -100,7 +100,7 @@ function App() {
             className="modal__label modal__label-type-radio"
           >
             <input type="radio" className="modal__radio-input" />
-            Cold
+            <span className="modal__span">Cold</span>
           </label>
         </fieldset>
       </ModalWithForm>

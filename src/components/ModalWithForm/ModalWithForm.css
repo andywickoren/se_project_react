@@ -1,20 +1,5 @@
-/* @font-face {
-  font-family: "Cabinet Grotesk", sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  src: url("../../vendors/fonts/CabinetGrotesk-Light.otf");
-}
-
 @font-face {
-  font-family: "Cabinet Grotesk", sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  src: url("./fonts/Inter-Regular.woff2") format("woff2"),
-    url("./fonts/Inter-Regular.woff") format("woff");
-} */
-
-@font-face {
-  font-family: "Cabinet Grotesk", sans-serif;
+  font-family: "Cabinet Grotesk";
   font-style: normal;
   font-weight: 700;
   src: url("../../vendors/fonts/woff2/CabinetGrotesk-Medium.woff2")
@@ -64,10 +49,20 @@
 }
 
 .modal__close {
+  padding: 0;
   position: absolute;
   top: 20px;
   right: 28px;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-image: url("../../assets/close-button.png");
 }
+
 .modal__content {
   background-color: #fff;
   position: relative;
@@ -109,7 +104,6 @@
   display: flex;
   align-items: center;
   margin-bottom: 8px;
-  cursor: pointer;
 }
 
 .modal__radio-input {
@@ -117,6 +111,17 @@
   margin-right: 5px;
 }
 
-.modal__radio-input:checked + .modal__label-type-radio {
+.modal__radio-input:checked + .modal__span {
   color: rgba(0, 0, 0, 1);
+}
+
+.modal__submit {
+  height: 36px;
+  width: 124px;
+  margin-top: 28px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
 }
