@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("../../vendors/fonts/woff2/CabinetGrotesk-Extrabold.woff2");
+}
+
 .modal__content_type_image {
   margin: 0;
   padding: 0;
