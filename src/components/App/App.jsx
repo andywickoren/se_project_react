@@ -8,7 +8,7 @@ import { coordinates, APIkey } from "../../utils/constants";
 import {
   getWeather,
   filterWeatherData,
-  parseWeatherData,
+  // parseWeatherData,
 } from "../../utils/weatherapi";
 import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
@@ -22,6 +22,7 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [temp, setTemp] = useState(0);
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -41,23 +42,28 @@ function App() {
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
+  // console.log(currentTemperatureUnit);
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
         const filteredData = filterWeatherData(data);
-        const temperature = parseWeatherData(data);
         setWeatherData(filteredData);
+        const temperature = filteredData.temp;
         setTemp(temperature);
-        console.log(temperature);
+        // console.log(temperature);
+        console.log(filteredData);
       })
       .catch(console.error);
   }, []);
 
-  useEffect(() => {
-    get;
-  });
+  // useEffect(() => {
+  //   get;
+  // });
 
-  console.log(currentTemperatureUnit);
+  // console.log(currentTemperatureUnit);
+
+  // console.log(filteredData);
 
   return (
     <div className="app">
@@ -65,8 +71,16 @@ function App() {
         value={{ currentTemperatureUnit, handleToggleSwitchChange }}
       >
         <div className="app__wrapper">
-          <Header handleAddClick={handleAddClick} weatherData={weatherData} />
-          <Main weatherData={weatherData} handleCardClick={handleCardClick} />
+          <Header
+            handleAddClick={handleAddClick}
+            weatherData={weatherData}
+            temp={temp}
+          />
+          <Main
+            weatherData={weatherData}
+            handleCardClick={handleCardClick}
+            WeatherTemp={temp}
+          />
           <Footer />
         </div>
         <ModalWithForm
