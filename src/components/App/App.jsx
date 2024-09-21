@@ -21,8 +21,8 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [temp, setTemp] = useState(0);
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -42,8 +42,6 @@ function App() {
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
-  // console.log(currentTemperatureUnit);
-
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -51,19 +49,9 @@ function App() {
         setWeatherData(filteredData);
         const temperature = filteredData.temp;
         setTemp(temperature);
-        // console.log(temperature);
-        console.log(filteredData);
       })
       .catch(console.error);
   }, []);
-
-  // useEffect(() => {
-  //   get;
-  // });
-
-  // console.log(currentTemperatureUnit);
-
-  // console.log(filteredData);
 
   return (
     <div className="app">
@@ -79,7 +67,7 @@ function App() {
           <Main
             weatherData={weatherData}
             handleCardClick={handleCardClick}
-            WeatherTemp={temp}
+            weatherTemp={temp}
           />
           <Footer />
         </div>

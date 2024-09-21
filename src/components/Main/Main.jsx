@@ -9,15 +9,10 @@ import "./Main.css";
 function Main({ weatherData, handleCardClick, weatherTemp }) {
   //   //prettier ignore
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  console.log(weatherTemp);
-  const temp = weatherTemp?.temperature?.[currentTemperatureUnit];
-  // console.log("***************");
-  // console.log(temp);
-  //   console.log(currentTemperatureUnit);
-  // console.log(currentTemperatureUnit);
+  const temp = weatherTemp?.[currentTemperatureUnit];
   return (
     <main>
-      <WeatherCard weatherData={weatherData} weatherTemp={weatherTemp} />
+      <WeatherCard weatherData={weatherData} weatherTemp={temp} />
       <section className="cards">
         <p className="cards__text">
           Today is {temp} &deg;F / You may want to wear:
