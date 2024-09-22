@@ -1,3 +1,4 @@
+import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "../Header/Header";
@@ -13,6 +14,12 @@ import {
 } from "../../utils/weatherapi";
 import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
+import Profile from "../Profile/Profile";
+import { getItems } from "../../utils/api";
+
+// ReactDOM.createRoot(document.getElementById("root")).render(
+//   <React.StrictMode>
+//     <BrowserRouter>
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -43,8 +50,8 @@ function App() {
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
-  const onAddItem = (e) => {
-    console.log(e);
+  const onAddItem = (values) => {
+    console.log(values);
   };
 
   useEffect(() => {
@@ -54,6 +61,14 @@ function App() {
         setWeatherData(filteredData);
         const temperature = filteredData.temp;
         setTemp(temperature);
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data);
       })
       .catch(console.error);
   }, []);
@@ -69,11 +84,24 @@ function App() {
             weatherData={weatherData}
             // temp={temp}
           />
-          <Main
-            weatherData={weatherData}
-            handleCardClick={handleCardClick}
-            weatherTemp={temp}
-          />
+
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  weatherTemp={temp}
+                />
+              }
+            />
+            <Route
+              path="/profile"
+              element={<Profile onCardClick={handleCardClick} />}
+            />
+          </Routes>
+
           <Footer />
           {activeModal === "add-garment" && (
             <AddItemModal
@@ -93,5 +121,8 @@ function App() {
     </div>
   );
 }
+// </BrowserRouter>
+//   </React.StrictMode>
+// );
 
 export default App;

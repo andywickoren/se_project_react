@@ -23,6 +23,11 @@
   cursor: pointer;
 }
 
+.header__link {
+  text-decoration: none;
+  color: #000;
+}
+
 .header__user-container {
   display: flex;
   align-items: center;
