@@ -9,13 +9,14 @@
 
 .profile {
   display: flex;
-  /* gap: 60px; */
   margin-top: 40px;
-  /* refer to Figma */
   font-family: "Cabinet Grotesk";
   font-style: normal;
   font-weight: 500;
 }
 
 .profile__sidebar {
+  max-width: 235px;
+  width: 100%;
+  box-sizing: border-box;
 }

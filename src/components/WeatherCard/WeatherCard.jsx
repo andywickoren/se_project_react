@@ -4,12 +4,6 @@ import { useContext } from "react";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 
 function WeatherCard({ weatherData, weatherTemp }) {
-  // const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  // console.log("/////////////////");
-  // console.log(weatherData);
-  // const temp = weatherTemp?.temperature?.[currentTemperatureUnit];
-  // console.log(temp);
-  // console.log(weatherTemp);
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.[currentTemperatureUnit];
   const filteredOptions = weatherOptions.filter((option) => {

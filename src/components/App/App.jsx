@@ -4,24 +4,15 @@ import "./App.css";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import AddItemModal from "../AddItemModal/AddItemModal";
-// import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
 import { coordinates, APIkey } from "../../utils/constants";
-import {
-  getWeather,
-  filterWeatherData,
-  // parseWeatherData,
-} from "../../utils/weatherapi";
+import { getWeather, filterWeatherData } from "../../utils/weatherapi";
 import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import Profile from "../Profile/Profile";
 import { getItems } from "../../utils/api";
 import { addItem } from "../../utils/api";
 import { deleteItem } from "../../utils/api";
-
-// ReactDOM.createRoot(document.getElementById("root")).render(
-//   <React.StrictMode>
-//     <BrowserRouter>
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -150,8 +141,5 @@ function App() {
     </div>
   );
 }
-// </BrowserRouter>
-//   </React.StrictMode>
-// );
 
 export default App;

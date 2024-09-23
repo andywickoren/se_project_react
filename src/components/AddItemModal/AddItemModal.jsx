@@ -4,19 +4,16 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
   const [name, setName] = useState("");
   const handleNameChange = (e) => {
-    console.log(e.target.value);
     setName(e.target.value);
   };
 
   const [link, setUrl] = useState("");
   const handleUrlChange = (e) => {
-    console.log(e.target.value);
     setUrl(e.target.value);
   };
 
   const [weatherType, setWeatherType] = useState("");
   const handleWeatherType = (e) => {
-    console.log(e.target.id);
     setWeatherType(e.target.id);
   };
 
@@ -30,16 +27,10 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
     <ModalWithForm
       title="New garment"
       buttonText="Add garment"
-      //   activeModal={activeModal}
       handleCloseClick={closeActiveModal}
       isOpen={isOpen}
       onSubmit={handleAddItemSubmit}
     >
-      {/* <ItemModal
-        activeModal={activeModal}
-        card={selectedCard}
-        handleCloseClick={closeActiveModal}
-      /> */}
       <label htmlFor="name" className="modal__label">
         Name
       </label>

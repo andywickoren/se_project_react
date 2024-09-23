@@ -7,7 +7,6 @@ function getItems() {
 }
 
 function addItem({ name, link, weatherType }) {
-  console.log({ name, link, weatherType });
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
@@ -21,7 +20,7 @@ function addItem({ name, link, weatherType }) {
 
 function deleteItem(id) {
   const url = `${baseUrl}/items/${id}`;
-  console.log("Delete URL:", url);
+
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
@@ -34,6 +33,6 @@ function deleteItem(id) {
   });
 }
 
-export { addItem };
 export { getItems };
+export { addItem };
 export { deleteItem };

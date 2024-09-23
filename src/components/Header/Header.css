@@ -52,4 +52,5 @@
 
 .header__username {
   cursor: pointer;
+  background-color: #f3f3f3;
 }
