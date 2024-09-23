@@ -59,10 +59,21 @@ function App() {
     deleteItem(id)
       .then(() => {
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item.id !== id)
+          prevItems.filter((item) => item._id !== id)
         );
+        closeActiveModal();
       })
       .catch((error) => console.error(error));
+  };
+
+  const handleAddItem = (newItem) => {
+    addItem(newItem)
+      .then((savedItem) => {
+        setClothingItems([savedItem, ...clothingItems]);
+      })
+      .catch((err) => {
+        console.error("Failed to add item:", err);
+      });
   };
 
   useEffect(() => {
@@ -124,7 +135,7 @@ function App() {
             <AddItemModal
               closeActiveModal={closeActiveModal}
               isOpen={activeModal === "add-garment"}
-              onAddItem={onAddItem}
+              onAddItem={handleAddItem}
             />
           )}
           {activeModal === "preview" && (

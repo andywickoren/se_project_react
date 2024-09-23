@@ -7,6 +7,7 @@ function getItems() {
 }
 
 function addItem({ name, link, weatherType }) {
+  console.log({ name, link, weatherType });
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {

@@ -1,0 +1,11 @@
+.sidebar {
+  display: flex;
+  max-width: 230px;
+  width: 100%;
+}
+
+.sidebar__avatar {
+  width: 56px;
+  height: 56px;
+  margin-right: 12px;
+}

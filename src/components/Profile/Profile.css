@@ -1,5 +1,21 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../../vendors/fonts/woff2/CabinetGrotesk-Medium.woff2")
+      format("woff2"),
+    url("../../vendors/fonts/woff/CabinetGrotesk-Medium.woff") format("woff");
+}
+
 .profile {
   display: flex;
-  gap: 100px;
+  /* gap: 60px; */
+  margin-top: 40px;
   /* refer to Figma */
+  font-family: "Cabinet Grotesk";
+  font-style: normal;
+  font-weight: 500;
+}
+
+.profile__sidebar {
 }

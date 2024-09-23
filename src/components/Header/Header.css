@@ -13,14 +13,30 @@
   font-weight: 500;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+}
+
+.header__right {
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
 .header__logo {
   margin-right: 24px;
 }
 .header__add-clothes-btn {
-  margin: 0 20px 0 auto;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
   cursor: pointer;
+  background-color: #f3f3f3;
 }
 
 .header__link {

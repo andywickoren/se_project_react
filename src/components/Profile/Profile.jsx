@@ -9,7 +9,6 @@ function Profile({ onCardClick, clothingItems }) {
         <SideBar />
       </section>
       <ClothesSection onCardClick={onCardClick} clothingItems={clothingItems} />
-      <section className="profile__clothing-items"></section>
     </div>
   );
 }

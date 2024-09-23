@@ -6,6 +6,7 @@
 .switch__box {
   border-radius: 25px;
   border: 2px solid black;
+  padding: 0;
   width: 55px;
   height: 30px;
   /* outline: none; */
