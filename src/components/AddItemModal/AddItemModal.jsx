@@ -14,9 +14,16 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
     setUrl(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const [weatherType, setWeatherType] = useState("");
+  const handleWeatherType = (e) => {
+    console.log(e.target.id);
+    setWeatherType(e.target.id);
+  };
+
+  const handleAddItemSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, link });
+    onAddItem({ name, link, weatherType });
+    closeActiveModal();
   };
 
   return (
@@ -26,7 +33,7 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
       //   activeModal={activeModal}
       handleCloseClick={closeActiveModal}
       isOpen={isOpen}
-      onSubmit={handleSubmit}
+      onSubmit={handleAddItemSubmit}
     >
       {/* <ItemModal
         activeModal={activeModal}
@@ -65,6 +72,7 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
             className="modal__radio-input"
             id="hot"
             name="weather"
+            onChange={handleWeatherType}
           />
           <span className="modal__span">Hot</span>
         </label>
@@ -74,6 +82,7 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
             type="radio"
             className="modal__radio-input"
             name="weather"
+            onChange={handleWeatherType}
           />
           <span className="modal__span">Warm</span>
         </label>
@@ -83,6 +92,7 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
             type="radio"
             className="modal__radio-input"
             name="weather"
+            onChange={handleWeatherType}
           />
           <span className="modal__span">Cold</span>
         </label>

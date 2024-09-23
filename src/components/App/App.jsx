@@ -16,6 +16,8 @@ import Footer from "../Footer/Footer";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import Profile from "../Profile/Profile";
 import { getItems } from "../../utils/api";
+import { addItem } from "../../utils/api";
+import { deleteItem } from "../../utils/api";
 
 // ReactDOM.createRoot(document.getElementById("root")).render(
 //   <React.StrictMode>
@@ -50,8 +52,17 @@ function App() {
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
-  const onAddItem = (values) => {
-    console.log(values);
+  const [clothingItems, setClothingItems] = useState([]);
+
+  const handleDelete = (item) => {
+    const id = item._id;
+    deleteItem(id)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item.id !== id)
+        );
+      })
+      .catch((error) => console.error(error));
   };
 
   useEffect(() => {
@@ -68,7 +79,7 @@ function App() {
   useEffect(() => {
     getItems()
       .then((data) => {
-        console.log(data);
+        setClothingItems(data);
       })
       .catch(console.error);
   }, []);
@@ -93,12 +104,18 @@ function App() {
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   weatherTemp={temp}
+                  clothingItems={clothingItems}
                 />
               }
             />
             <Route
               path="/profile"
-              element={<Profile onCardClick={handleCardClick} />}
+              element={
+                <Profile
+                  onCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
             />
           </Routes>
 
@@ -114,6 +131,7 @@ function App() {
             <ItemModal
               card={selectedCard}
               handleCloseClick={closeActiveModal}
+              deleteItem={() => handleDelete(selectedCard)}
             />
           )}
         </div>
