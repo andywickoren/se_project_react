@@ -82,9 +82,14 @@ function App() {
     getItems()
       .then((data) => {
         setClothingItems(data);
+        console.log(clothingItems);
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    console.log(clothingItems);
+  }, [clothingItems]);
 
   return (
     <div className="app">
@@ -116,6 +121,7 @@ function App() {
                 <Profile
                   onCardClick={handleCardClick}
                   clothingItems={clothingItems}
+                  handleAddClick={handleAddClick}
                 />
               }
             />

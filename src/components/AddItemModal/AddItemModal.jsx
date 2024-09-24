@@ -7,19 +7,19 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
     setName(e.target.value);
   };
 
-  const [link, setUrl] = useState("");
+  const [imageUrl, setUrl] = useState("");
   const handleUrlChange = (e) => {
     setUrl(e.target.value);
   };
 
-  const [weatherType, setWeatherType] = useState("");
+  const [weather, setWeather] = useState("");
   const handleWeatherType = (e) => {
-    setWeatherType(e.target.id);
+    setWeather(e.target.id);
   };
 
   const handleAddItemSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, link, weatherType });
+    onAddItem({ name, imageUrl, weather });
     closeActiveModal();
   };
 
@@ -49,7 +49,7 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
         className="modal__input"
         id="imageUrl"
         placeholder="Image URL"
-        value={link}
+        value={imageUrl}
         onChange={handleUrlChange}
       />
 
