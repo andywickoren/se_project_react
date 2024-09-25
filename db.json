@@ -1,12 +1,6 @@
 {
   "items": [
     {
-      "_id": 8,
-      "name": "Loafers",
-      "weather": "warm",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Loafers.png?etag=dc2d6e1ca7b297597406e35c40aef030"
-    },
-    {
       "_id": 9,
       "name": "Sandals",
       "weather": "hot",
@@ -61,16 +55,16 @@
       "_id": 17
     },
     {
-      "name": "Spring shirt",
+      "name": "Spring Shirt",
       "imageUrl": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSe8fSA9PFOG5755am7i7Q64eRit9UC3dL8hFN1ZVTPIBRd7ouop3GB0hObcv-tJTuEk8dCWcVQXxrF6eJ5jTFoc6wTQiSA0hlj3a62YH_V2Rm2ZwxGwED1OSTvx4bXHzgbSM4gpQ&usqp=CAc",
       "weather": "warm",
-      "_id": 18
+      "_id": 19
     },
     {
       "name": "Fall Shirt",
       "imageUrl": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcSe8fSA9PFOG5755am7i7Q64eRit9UC3dL8hFN1ZVTPIBRd7ouop3GB0hObcv-tJTuEk8dCWcVQXxrF6eJ5jTFoc6wTQiSA0hlj3a62YH_V2Rm2ZwxGwED1OSTvx4bXHzgbSM4gpQ&usqp=CAc",
       "weather": "cold",
-      "_id": 19
+      "_id": 20
     }
   ]
 }

@@ -46,6 +46,7 @@ function App() {
   const [clothingItems, setClothingItems] = useState([]);
 
   const handleDelete = (item) => {
+    console.log("item", item);
     const id = item._id;
     deleteItem(id)
       .then(() => {
@@ -87,9 +88,9 @@ function App() {
       .catch(console.error);
   }, []);
 
-  useEffect(() => {
-    console.log(clothingItems);
-  }, [clothingItems]);
+  // useEffect(() => {
+  //   console.log(clothingItems);
+  // }, [clothingItems]);
 
   return (
     <div className="app">
