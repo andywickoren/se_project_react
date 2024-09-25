@@ -14,13 +14,15 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
   };
 
   const handleAddItemSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault(); // Prevent default form submission behavior
+
+    // Call onAddItem with the values and wait for the promise to resolve
     onAddItem(values)
       .then(() => {
-        closeActiveModal();
+        closeActiveModal(); // Call closeActiveModal only after onAddItem resolves
       })
       .catch((error) => {
-        console.error("Error adding item:", error);
+        console.error("Error adding item:", error); // Handle any errors from onAddItem
       });
   };
 
