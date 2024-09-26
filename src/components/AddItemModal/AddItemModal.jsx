@@ -1,31 +1,25 @@
 // import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm/";
-
 const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
   const { values, handleChange, setValues } = useForm({
     name: "",
     imageUrl: "",
     weather: "",
   });
-
   const handleWeatherType = (e) => {
     setValues({ ...values, weather: e.target.id });
   };
-
   const handleAddItemSubmit = (e) => {
-    e.preventDefault(); // Prevent default form submission behavior
-
-    // Call onAddItem with the values and wait for the promise to resolve
+    e.preventDefault();
     onAddItem(values)
       .then(() => {
-        closeActiveModal(); // Call closeActiveModal only after onAddItem resolves
+        closeActiveModal();
       })
       .catch((error) => {
-        console.error("Error adding item:", error); // Handle any errors from onAddItem
+        console.error("Error adding item:", error);
       });
   };
-
   return (
     <ModalWithForm
       title="New garment"
@@ -58,7 +52,6 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
         value={values.imageUrl}
         onChange={handleChange}
       />
-
       <fieldset className="modal__radio-buttons">
         <legend className="modal__legend_title">
           Select the weather type:
@@ -100,5 +93,4 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
     </ModalWithForm>
   );
 };
-
 export default AddItemModal;

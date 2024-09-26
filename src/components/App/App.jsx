@@ -59,7 +59,7 @@ function App() {
   };
 
   const handleAddItem = (newItem) => {
-    addItem(newItem)
+    return addItem(newItem)
       .then((savedItem) => {
         setClothingItems([savedItem, ...clothingItems]);
       })
