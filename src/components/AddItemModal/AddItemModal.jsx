@@ -1,4 +1,3 @@
-// import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm/";
 const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
@@ -10,16 +9,12 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
   const handleWeatherType = (e) => {
     setValues({ ...values, weather: e.target.id });
   };
+
   const handleAddItemSubmit = (e) => {
     e.preventDefault();
-    onAddItem(values)
-      .then(() => {
-        closeActiveModal();
-      })
-      .catch((error) => {
-        console.error("Error adding item:", error);
-      });
+    onAddItem(values);
   };
+
   return (
     <ModalWithForm
       title="New garment"

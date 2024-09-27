@@ -62,6 +62,7 @@ function App() {
     return addItem(newItem)
       .then((savedItem) => {
         setClothingItems([savedItem, ...clothingItems]);
+        closeActiveModal();
       })
       .catch((err) => {
         console.error("Failed to add item:", err);
