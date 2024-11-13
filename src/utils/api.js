@@ -12,7 +12,7 @@ function checkDelete(res) {
 
 function getItems() {
   return fetch(`${baseUrl}/items`).then(checkResponse);
-}
+}I j
 
 function addItem({ name, imageUrl, weather }) {
   return fetch(`${baseUrl}/items`, {
