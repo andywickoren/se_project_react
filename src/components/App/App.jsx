@@ -5,6 +5,7 @@ import Header from "../Header/Header";
 import Main from "../Main/Main";
 import AddItemModal from "../AddItemModal/AddItemModal";
 import ItemModal from "../ItemModal/ItemModal";
+import RegisterModal from "../RegisterModal/RegisterModal";
 import { coordinates, APIkey } from "../../utils/constants";
 import { getWeather, filterWeatherData } from "../../utils/weatherapi";
 import Footer from "../Footer/Footer";
@@ -13,6 +14,9 @@ import Profile from "../Profile/Profile";
 import { getItems } from "../../utils/api";
 import { addItem } from "../../utils/api";
 import { deleteItem } from "../../utils/api";
+import * as auth from "../../utils/auth";
+import { setToken, getToken, removeToken } from "../../utils/token";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -24,6 +28,63 @@ function App() {
   const [selectedCard, setSelectedCard] = useState({});
   const [temp, setTemp] = useState(0);
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [userData, setUserData] = useState({
+    username: "",
+    email: "",
+    avatarUrl: "",
+    _id: "",
+  });
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleRegistration = (data) => {
+    auth.register(data);
+    console.log(data);
+    // .then(() => {
+    //   onLogin(data);
+    //   closeActiveModal();
+    // })
+    // .catch(console.error);
+  };
+
+  const onLogin = (data) => {
+    if (!email || !password) {
+      return;
+    }
+
+    auth
+      .authorize(data)
+      .then((res) => {
+        if (res.jwt) {
+          setToken(res.jwt);
+          setUserData(res.user);
+          setIsLoggedIn(true);
+          closeActiveModal();
+        }
+      })
+      .catch(console.error);
+  };
+
+  useEffect(() => {
+    const jwt = getToken();
+
+    if (!jwt) {
+      return;
+    }
+    getUserInfo(jwt)
+      .then(({ username, email }) => {
+        setIsLoggedIn(true);
+        setUserData({ username, email });
+      })
+      .catch(console.error);
+  }, []);
+
+  const handleSignUpClick = () => {
+    setActiveModal("register");
+  };
+
+  const handleLoginClick = () => {
+    setActiveModal("login");
+  };
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -100,7 +161,10 @@ function App() {
       >
         <div className="app__wrapper">
           <Header
+            handleSignUpClick={handleSignUpClick}
+            handleLoginClick={handleLoginClick}
             handleAddClick={handleAddClick}
+            isLoggedIn={isLoggedIn}
             weatherData={weatherData}
             // temp={temp}
           />
@@ -120,11 +184,13 @@ function App() {
             <Route
               path="/profile"
               element={
-                <Profile
-                  onCardClick={handleCardClick}
-                  clothingItems={clothingItems}
-                  handleAddClick={handleAddClick}
-                />
+                <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <Profile
+                    onCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    handleAddClick={handleAddClick}
+                  />
+                </ProtectedRoute>
               }
             />
           </Routes>
@@ -142,6 +208,14 @@ function App() {
               card={selectedCard}
               handleCloseClick={closeActiveModal}
               deleteItem={() => handleDelete(selectedCard)}
+            />
+          )}
+          {activeModal === "register" && (
+            <RegisterModal
+              closeActiveModal={closeActiveModal}
+              handleRegistration={handleRegistration}
+              isOpen={activeModal === "register"}
+              openLoginModal={handleLoginClick}
             />
           )}
         </div>

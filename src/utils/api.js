@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3001";
+const baseUrl = "http://localhost:8000";
 
 export function checkResponse(res) {
   return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
@@ -12,7 +12,7 @@ function checkDelete(res) {
 
 function getItems() {
   return fetch(`${baseUrl}/items`).then(checkResponse);
-}I j
+}
 
 function addItem({ name, imageUrl, weather }) {
   return fetch(`${baseUrl}/items`, {

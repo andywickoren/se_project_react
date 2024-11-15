@@ -1,7 +1,14 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import React, { useState } from "react";
+// import { useState } from "react";
 // import { useForm } from "../../hooks/useForm/";
 
-const Register = ({ closeActiveModal, handleRegistration, isOpen }) => {
+function RegisterModal({
+  closeActiveModal,
+  handleRegistration,
+  isOpen,
+  openLoginModal,
+}) {
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -92,7 +99,20 @@ const Register = ({ closeActiveModal, handleRegistration, isOpen }) => {
         placeholder="Avatar URL"
         onChange={handleChange}
       />
+      <div className="modal__buttons-wrapper">
+        <button type="submit" className="modal__submit">
+          Sign Up
+        </button>
+
+        <button
+          type="button"
+          className="modal__or-login-btn"
+          onClick={openLoginModal}
+        >
+          or Log In
+        </button>
+      </div>
     </ModalWithForm>
   );
-};
-export default Register;
+}
+export default RegisterModal;
