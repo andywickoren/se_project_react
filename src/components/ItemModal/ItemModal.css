@@ -2,6 +2,14 @@
   font-family: "Cabinet Grotesk";
   src: url("../../vendors/fonts/woff2/CabinetGrotesk-Extrabold.woff2");
 }
+/* 
+.modal__delete-item_button_visible {
+  display: block;
+} */
+
+.modal__delete-item_button_hidden {
+  display: none;
+}
 
 .modal__content_type_image {
   margin: 0;
@@ -45,7 +53,8 @@
 .modal__clothing-info_weather {
   margin: 0;
 }
-.modal__delete-item_button {
+.modal__delete-item_button_visible {
+  display: block;
   background: none;
   border: none;
   padding: 0;

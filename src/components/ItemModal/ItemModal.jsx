@@ -1,6 +1,22 @@
+import React, { useContext } from "react";
 import "./ItemModal.css";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ItemModal({ card, handleCloseClick, deleteItem }) {
+  const { currentUser } = useContext(CurrentUserContext);
+  console.log("*********************************");
+  console.log(`{Card Owner: ${card.owner}`);
+  console.log(`{Current User: ${currentUser._id}`);
+  console.log("Current User:", currentUser);
+  const isOwn = String(card.owner) === String(currentUser._id);
+  const itemDeleteButtonClassName = `modal__delete-item_button ${
+    isOwn
+      ? "modal__delete-item_button_visible"
+      : "modal__delete-item_button_hidden"
+  }`;
+  // console.log("Current User:", currentUser);
+  // console.log("Card:", card);
+
   return (
     <div className="modal modal_opened">
       <div className="modal__content modal__content_type_image">
@@ -18,14 +34,17 @@ function ItemModal({ card, handleCloseClick, deleteItem }) {
                 Weather: {card.weather}
               </p>
             </div>
-            <div className="modal__delete-item">
+            {/* <div className="modal__delete-item"> */}
+            {isOwn && (
               <button
-                className="modal__delete-item_button"
+                className={itemDeleteButtonClassName}
                 onClick={() => deleteItem(card)}
+                type="button"
               >
                 Delete item
               </button>
-            </div>
+            )}
+            {/* </div> */}
           </div>
         </div>
       </div>

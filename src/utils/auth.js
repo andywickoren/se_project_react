@@ -1,6 +1,8 @@
+import { checkResponse } from "./api";
+
 export const BASE_URL = "http://localhost:8000";
 
-export const register = (name, avatar, email, password) => {
+export const register = ({ name, avatar, email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
     method: "POST",
     headers: {
@@ -27,12 +29,12 @@ export const authorize = ({ email, password }) => {
   });
 };
 
-export const getUserInfo = (token) => {
-  return fetch(`${baseUrl}/users/me`, {
+export const getUserInfo = (jwt) => {
+  return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      authorization: `Bearer ${jwt}`,
     },
   }).then(checkResponse);
 };

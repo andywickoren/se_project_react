@@ -13,7 +13,7 @@ function RegisterModal({
     email: "",
     password: "",
     name: "",
-    avatarUrl: "",
+    avatar: "",
   });
 
   const handleChange = (e) => {
@@ -46,7 +46,6 @@ function RegisterModal({
   return (
     <ModalWithForm
       title="Sign up"
-      buttonText="Next"
       handleCloseClick={closeActiveModal}
       isOpen={isOpen}
       onSubmit={onRegistration}
@@ -93,17 +92,19 @@ function RegisterModal({
       <input
         type="url"
         className="modal__input"
-        id="avatarUrl"
-        name="avatarUrl"
-        value={data.avatarUrl}
+        id="avatar"
+        name="avatar"
+        value={data.avatar}
         placeholder="Avatar URL"
         onChange={handleChange}
       />
       <div className="modal__buttons-wrapper">
-        <button type="submit" className="modal__submit">
+        {/* <button type="submit" className="modal__submit">
           Sign Up
+        </button> */}
+        <button type="submit" className="modal__submit">
+          Next
         </button>
-
         <button
           type="button"
           className="modal__or-login-btn"

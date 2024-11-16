@@ -1,6 +1,6 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm/";
-const LoginModal = ({ closeActiveModal, /*login*/ isOpen }) => {
+function LoginModal({ closeActiveModal, login, isOpen }) {
   const { values, handleChange, setValues } = useForm({
     name: "",
     imageUrl: "",
@@ -87,5 +87,5 @@ const LoginModal = ({ closeActiveModal, /*login*/ isOpen }) => {
       </fieldset>
     </ModalWithForm>
   );
-};
+}
 export default AddItemModal;
