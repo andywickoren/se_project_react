@@ -20,6 +20,7 @@ import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { EditProfileModal } from "../EditProfileModal/EditProfileModal";
 import ConfirmDeleteModal from "../ConfrimDeleteModal/ConfrimDeleteModal";
+import LoginModal from "../LoginModal/LoginModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -99,7 +100,7 @@ function App() {
   useEffect(() => {
     console.log("isLoggedIn:", isLoggedIn);
     console.log("currentUser:", currentUser);
-    console.log("weatherData:", weatherData);
+    // console.log("weatherData:", weatherData);
   }, [isLoggedIn, currentUser, weatherData]);
 
   const handleSignUpClick = () => {
@@ -297,6 +298,14 @@ function App() {
                 isOpen={activeModal === "edit-profile"}
                 onClose={closeActiveModal}
                 onEditProfile={onEditProfile}
+              />
+            )}
+            {activeModal === "login" && (
+              <LoginModal
+                isOpen={activeModal === "login"}
+                onClose={closeActiveModal}
+                onLogin={onLogin}
+                onSignup={handleSignUpClick}
               />
             )}
           </div>

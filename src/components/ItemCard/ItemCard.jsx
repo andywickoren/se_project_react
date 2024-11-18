@@ -9,9 +9,9 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    console.log("Item:", item);
-    console.log("Item likes:", item?.likes);
-    console.log("*********Current User:", JSON.stringify(currentUser, null, 2));
+    // console.log("Item:", item);
+    // console.log("Item likes:", item?.likes);
+    // console.log("*********Current User:", JSON.stringify(currentUser, null, 2));
     setIsLiked(item?.likes?.some((id) => id === currentUser._id));
   }, [item.likes, currentUser._id]);
 

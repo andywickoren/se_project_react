@@ -21,8 +21,8 @@ function Header({
   });
   const { name } = useContext(CurrentUserContext);
 
-  console.log("*******************************");
-  console.log(isLoggedIn);
+  // console.log("*******************************");
+  // console.log(isLoggedIn);
   return (
     <header className="header">
       <div className="header__left">

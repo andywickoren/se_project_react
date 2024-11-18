@@ -26,7 +26,7 @@ function Main({
               return item.weather === weatherData.type;
             })
             .map((item) => {
-              console.log("Passing item to ItemCard:", item);
+              // console.log("Passing item to ItemCard:", item);
               return (
                 <ItemCard
                   key={item._id}
