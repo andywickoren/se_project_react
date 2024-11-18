@@ -11,6 +11,8 @@ export function EditProfileModal({ isOpen, onClose, onEditProfile }) {
   });
 
   useEffect(() => {
+    console.log("currentUser:", currentUser);
+    console.log("data:", data);
     if (currentUser) {
       setData({
         name: currentUser.name || "",

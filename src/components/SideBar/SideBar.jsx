@@ -1,7 +1,7 @@
 import avatar from "../../assets/avatar.png";
 import "./SideBar.css";
 
-function SideBar({ handleEditProfileClick }) {
+function SideBar({ handleEditProfileClick, handleLogOutClick }) {
   return (
     <>
       <div className="sidebar">
@@ -18,7 +18,9 @@ function SideBar({ handleEditProfileClick }) {
         </button>
         <button
           className="sidebar__logout-btn"
-          onClick={handleEditProfileClick}
+          onClick={() => {
+            handleLogOutClick();
+          }}
           type="button"
         >
           Log out

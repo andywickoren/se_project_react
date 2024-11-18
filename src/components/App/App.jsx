@@ -19,6 +19,7 @@ import { setToken, getToken, removeToken } from "../../utils/token";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { EditProfileModal } from "../EditProfileModal/EditProfileModal";
+import ConfirmDeleteModal from "../ConfrimDeleteModal/ConfrimDeleteModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -40,7 +41,7 @@ function App() {
   const [isLiked, setIsLiked] = useState(false);
 
   const handleRegistration = (data) => {
-    console.log("did we make it into resgistration");
+    console.log("made it into resgistration");
     auth
       .register(data)
       .then(() => {
@@ -61,7 +62,7 @@ function App() {
         if (res.token) {
           console.log(res.token);
           setToken(res.token);
-          setUserData(res.user);
+          setCurrentUser(res.user);
           setIsLoggedIn(true);
           closeActiveModal();
         }
@@ -126,6 +127,10 @@ function App() {
     setActiveModal("edit-profile");
   };
 
+  const handleDeleteClick = () => {
+    setActiveModal("confirm-delete");
+  };
+
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
@@ -155,9 +160,10 @@ function App() {
   };
 
   const handleDelete = (item) => {
+    const jwt = localStorage.getItem("jwt");
     console.log("item", item);
     const id = item._id;
-    deleteItem(id)
+    deleteItem(id, jwt)
       .then(() => {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item._id !== id)
@@ -179,6 +185,17 @@ function App() {
       });
   };
 
+  const handleLogOutClick = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setCurrentUser({
+      name: "",
+      email: "",
+      avatar: "",
+      _id: "",
+    });
+  };
+
   useEffect(() => {
     getWeather(coordinates, APIkey)
       .then((data) => {
@@ -189,7 +206,6 @@ function App() {
       })
       .catch(console.error);
   }, []);
-
   useEffect(() => {
     getItems()
       .then((data) => {
@@ -238,6 +254,7 @@ function App() {
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
                       handleEditProfileClick={handleEditProfileClick}
+                      handleLogOutClick={handleLogOutClick}
                     />
                   </ProtectedRoute>
                 }
@@ -256,6 +273,14 @@ function App() {
               <ItemModal
                 card={selectedCard}
                 handleCloseClick={closeActiveModal}
+                deleteItemClick={handleDeleteClick}
+              />
+            )}
+            {activeModal === "confirm-delete" && (
+              <ConfirmDeleteModal
+                card={selectedCard}
+                handleCloseClick={closeActiveModal}
+                deleteItemClick={handleDeleteClick}
                 deleteItem={() => handleDelete(selectedCard)}
               />
             )}

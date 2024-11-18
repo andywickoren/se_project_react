@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import "./ItemModal.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ItemModal({ card, handleCloseClick, deleteItem }) {
+function ItemModal({ card, handleCloseClick, handleDeleteClick }) {
   const { currentUser } = useContext(CurrentUserContext);
   console.log("*********************************");
   console.log(`{Card Owner: ${card.owner}`);
@@ -24,6 +24,7 @@ function ItemModal({ card, handleCloseClick, deleteItem }) {
           onClick={handleCloseClick}
           type="button"
           className="modal__close modal__close_white"
+          aria-label="close"
         ></button>
         <img src={card.imageUrl} alt={card.name} className="modal__image" />
         <div className="modal__footer">
@@ -38,7 +39,7 @@ function ItemModal({ card, handleCloseClick, deleteItem }) {
             {isOwn && (
               <button
                 className={itemDeleteButtonClassName}
-                onClick={() => deleteItem(card)}
+                onClick={handleDeleteClick}
                 type="button"
               >
                 Delete item

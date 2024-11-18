@@ -4,6 +4,8 @@ import logo from "../../assets/logo.svg";
 // import avatar from "../../assets/avatar.png";
 import { Link } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Header({
   handleSignUpClick,
@@ -17,6 +19,10 @@ function Header({
     month: "long",
     day: "numeric",
   });
+  const { name } = useContext(CurrentUserContext);
+
+  console.log("*******************************");
+  console.log(isLoggedIn);
   return (
     <header className="header">
       <div className="header__left">
