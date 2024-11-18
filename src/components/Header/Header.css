@@ -51,6 +51,8 @@
 }
 
 .header__username {
+  text-decoration: none;
+  border: none;
   cursor: pointer;
   background-color: #f3f3f3;
 }

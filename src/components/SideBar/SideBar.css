@@ -9,3 +9,26 @@
   height: 56px;
   margin-right: 12px;
 }
+
+.sidebar__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.sidebar__change-profile-btn {
+  border: none;
+  padding: 0;
+  margin: 24px 0 8px 0;
+  font: inherit;
+  cursor: pointer;
+  background-color: #f3f3f3;
+}
+
+.sidebar__logout-btn {
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  cursor: pointer;
+  background-color: #f3f3f3;
+}

@@ -85,6 +85,15 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
           <span className="modal__span">Cold</span>
         </label>
       </fieldset>
+      <div className="modal__buttons-wrapper">
+        <button
+          type="submit"
+          className="modal__submit"
+          onClick={handleAddItemSubmit}
+        >
+          Add
+        </button>
+      </div>
     </ModalWithForm>
   );
 };

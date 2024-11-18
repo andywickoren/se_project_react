@@ -20,6 +20,14 @@
   gap: 20px;
 }
 
+.clothes-section__no-items {
+  color: gray;
+  font-size: 16px;
+  /* text-align: center;
+  width: 100%;
+  margin: 20px 0; */
+}
+
 .clothes-section__add-button {
   border: none;
   padding: 0;

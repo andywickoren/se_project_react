@@ -37,4 +37,22 @@ function deleteItem(id, jwt) {
   }).then(checkDelete);
 }
 
-export { getItems, addItem, deleteItem };
+function addCardLike(_id, token) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+}
+
+function removeCardLike(_id, token) {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+}
+
+export { getItems, addItem, deleteItem, addCardLike, removeCardLike };

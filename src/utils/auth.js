@@ -38,3 +38,14 @@ export const getUserInfo = (jwt) => {
     },
   }).then(checkResponse);
 };
+
+export const editProfile = ({ name, avatar }, jwt) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${jwt}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  }).then(checkResponse);
+};

@@ -18,6 +18,7 @@ import * as auth from "../../utils/auth";
 import { setToken, getToken, removeToken } from "../../utils/token";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { EditProfileModal } from "../EditProfileModal/EditProfileModal";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -36,6 +37,7 @@ function App() {
     _id: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
   const handleRegistration = (data) => {
     console.log("did we make it into resgistration");
@@ -63,6 +65,17 @@ function App() {
           setIsLoggedIn(true);
           closeActiveModal();
         }
+      })
+      .catch(console.error);
+  };
+
+  const onEditProfile = () => {
+    const token = localStorage.getItem("jwt");
+    auth
+      .editProfile(data, token)
+      .then((res) => {
+        setCurrentUser(res.data);
+        closeActiveModal();
       })
       .catch(console.error);
   };
@@ -109,12 +122,37 @@ function App() {
     setSelectedCard(card);
   };
 
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile");
+  };
+
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
     if (currentTemperatureUnit === "F") setCurrentTemperatureUnit("C");
   };
 
   const [clothingItems, setClothingItems] = useState([]);
+
+  const handleCardLike = ({ _id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    !isLiked
+      ? api
+          .addCardLike(_id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err))
+      : api
+          .removeCardLike(_id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item))
+            );
+          })
+          .catch((err) => console.log(err));
+  };
 
   const handleDelete = (item) => {
     console.log("item", item);
@@ -130,7 +168,8 @@ function App() {
   };
 
   const handleAddItem = (newItem) => {
-    return addItem(newItem)
+    const jwt = localStorage.getItem("jwt");
+    return addItem(newItem, jwt)
       .then((savedItem) => {
         setClothingItems([savedItem, ...clothingItems]);
         closeActiveModal();
@@ -160,10 +199,6 @@ function App() {
       .catch(console.error);
   }, []);
 
-  // useEffect(() => {
-  //   console.log(clothingItems);
-  // }, [clothingItems]);
-
   return (
     <div className="app">
       <CurrentTemperatureUnitContext.Provider
@@ -178,7 +213,6 @@ function App() {
               isLoggedIn={isLoggedIn}
               weatherData={weatherData}
               currentUser={currentUser}
-              // temp={temp}
             />
 
             <Routes>
@@ -190,6 +224,7 @@ function App() {
                     handleCardClick={handleCardClick}
                     weatherTemp={temp}
                     clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
@@ -199,8 +234,10 @@ function App() {
                   <ProtectedRoute isLoggedIn={isLoggedIn}>
                     <Profile
                       onCardClick={handleCardClick}
+                      onCardLike={handleCardLike}
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
+                      handleEditProfileClick={handleEditProfileClick}
                     />
                   </ProtectedRoute>
                 }
@@ -228,6 +265,13 @@ function App() {
                 handleRegistration={handleRegistration}
                 isOpen={activeModal === "register"}
                 openLoginModal={handleLoginClick}
+              />
+            )}
+            {activeModal === "edit-profile" && (
+              <EditProfileModal
+                isOpen={activeModal === "edit-profile"}
+                onClose={closeActiveModal}
+                onEditProfile={onEditProfile}
               />
             )}
           </div>

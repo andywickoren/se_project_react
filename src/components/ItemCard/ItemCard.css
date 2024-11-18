@@ -26,3 +26,11 @@
   object-fit: contain;
   border-radius: 30px;
 }
+
+.card__like-btn {
+  width: 30px;
+  height: 30px;
+  border: 2px solid red;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: inline-block;
+}

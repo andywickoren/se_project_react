@@ -4,7 +4,13 @@ import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import "./Main.css";
 
-function Main({ weatherData, handleCardClick, weatherTemp, clothingItems }) {
+function Main({
+  weatherData,
+  handleCardClick,
+  weatherTemp,
+  clothingItems,
+  onCardLike,
+}) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
   const temp = weatherTemp?.[currentTemperatureUnit];
   return (
@@ -20,11 +26,13 @@ function Main({ weatherData, handleCardClick, weatherTemp, clothingItems }) {
               return item.weather === weatherData.type;
             })
             .map((item) => {
+              console.log("Passing item to ItemCard:", item);
               return (
                 <ItemCard
                   key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
+                  onCardLike={onCardLike}
                 />
               );
             })}
