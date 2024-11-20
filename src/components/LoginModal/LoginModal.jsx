@@ -13,10 +13,10 @@ function LoginModal({ isOpen, onLogin, onClose, onRegister }) {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onRegister({ email: formData.email, password: formData.password });
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   onRegister({ email: formData.email, password: formData.password });
+  // };
 
   return (
     <ModalWithForm
@@ -25,7 +25,7 @@ function LoginModal({ isOpen, onLogin, onClose, onRegister }) {
       handleCloseClick={onClose}
       isOpen={isOpen}
       name={"login"}
-      onSubmit={handleSubmit}
+      // onSubmit={handleSubmit}
     >
       <label htmlFor="email" className="modal__label">
         Email
@@ -52,13 +52,17 @@ function LoginModal({ isOpen, onLogin, onClose, onRegister }) {
         onChange={handleInputChange}
       />
       <div className="modal__buttons-wrapper">
-        <button type="submit" className="modal__submit">
+        <button
+          type="submit"
+          className="modal__submit modal__login-btn"
+          onSubmit={onLogin}
+        >
           Log In
         </button>
         <button
           type="button"
           className="modal__or-signup-btn"
-          onClick={onLogin}
+          onClick={onRegister}
         >
           or Sign Up
         </button>

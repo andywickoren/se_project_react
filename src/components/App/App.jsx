@@ -147,12 +147,12 @@ function App() {
     return !isLiked
       ? addCardLike(_id, token).then((updatedCard) => {
           setClothingItems((cards) =>
-            cards.map((item) => (item._id === id ? updatedCard : item))
+            cards.map((item) => (item._id === _id ? updatedCard.data : item))
           );
         })
       : removeCardLike(_id, token).then((updatedCard) => {
           setClothingItems((cards) =>
-            cards.map((item) => (item._id === id ? updatedCard : item))
+            cards.map((item) => (item._id === _id ? updatedCard.data : item))
           );
         });
   };

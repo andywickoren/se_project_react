@@ -38,9 +38,9 @@ function deleteItem(id, jwt) {
 }
 
 function addCardLike(_id, token) {
-  debugger;
+  // debugger;
   return fetch(`${baseUrl}/items/${_id}/likes`, {
-    method: "POST",
+    method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
     },

@@ -5,7 +5,10 @@
   object-fit: cover;
 }
 
-.avatar__letter {
+.avatar {
+}
+
+.avatar__circle {
   width: 40px;
   height: 40px;
   border-radius: 50%;
