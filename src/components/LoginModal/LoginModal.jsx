@@ -1,8 +1,8 @@
 import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import "./LoginModal.css";
+// import "./LoginModal.css";
 
-function LoginModal({ isOpen, onLogIn, onClose, onSignup }) {
+function LoginModal({ isOpen, onLogin, onClose, onRegister }) {
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleInputChange = (e) => {
@@ -15,7 +15,7 @@ function LoginModal({ isOpen, onLogIn, onClose, onSignup }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogIn({ email: formData.email, password: formData.password });
+    onRegister({ email: formData.email, password: formData.password });
   };
 
   return (
@@ -27,30 +27,30 @@ function LoginModal({ isOpen, onLogIn, onClose, onSignup }) {
       name={"login"}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="email" className="modal__input_type_email">
+      <label htmlFor="email" className="modal__label">
         Email
-        <input
-          type="text"
-          className="modal__input"
-          id="email"
-          name="email" // Important for dynamic updates
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleInputChange}
-        />
       </label>
-      <label htmlFor="password" className="modal__input_type_password">
+      <input
+        type="text"
+        className="modal__input"
+        id="email"
+        name="email"
+        placeholder="Email"
+        value={formData.email}
+        onChange={handleInputChange}
+      />
+      <label htmlFor="password" className="modal__label">
         Password
-        <input
-          type="password" // Updated to password type for security
-          className="modal__input"
-          id="password"
-          name="password" // Important for dynamic updates
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
       </label>
+      <input
+        type="password"
+        className="modal__input"
+        id="password"
+        name="password"
+        placeholder="Password"
+        value={formData.password}
+        onChange={handleInputChange}
+      />
       <div className="modal__buttons-wrapper">
         <button type="submit" className="modal__submit">
           Log In
@@ -58,7 +58,7 @@ function LoginModal({ isOpen, onLogIn, onClose, onSignup }) {
         <button
           type="button"
           className="modal__or-signup-btn"
-          onClick={onSignup}
+          onClick={onLogin}
         >
           or Sign Up
         </button>

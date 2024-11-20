@@ -41,27 +41,31 @@ export function EditProfileModal({ isOpen, onClose, onEditProfile }) {
       isOpen={isOpen}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="name" className="modal__input_type_name">
-        Name{" "}
-        <input
-          type="text"
-          className="modal__input"
-          placeholder="Name"
-          value={data.name}
-          onChange={handleChange}
-        />
+      <label htmlFor="name" className="modal__label">
+        Name *{" "}
       </label>
-      <label htmlFor="avatarUrl" className="modal__input_type_avatarurl">
-        Avatar{" "}
-        <input
-          type="url"
-          className="modal__input"
-          id="avatarurl"
-          placeholder="Avatar URL"
-          value={data.avatar}
-          onChange={handleChange}
-        />
+      <input
+        type="text"
+        name="name"
+        className="modal__input"
+        placeholder="Name"
+        value={data.name}
+        onChange={handleChange}
+      />
+
+      <label htmlFor="avatarUrl" className="modal__label">
+        Avatar *{" "}
       </label>
+      <input
+        type="url"
+        name="avatar"
+        className="modal__input"
+        id="avatarurl"
+        placeholder="Avatar URL"
+        value={data.avatar}
+        onChange={handleChange}
+      />
+
       <button type="submit" className="modal__submit">
         Save changes
       </button>

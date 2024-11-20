@@ -38,7 +38,8 @@ function deleteItem(id, jwt) {
 }
 
 function addCardLike(_id, token) {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+  debugger;
+  return fetch(`${baseUrl}/items/${_id}/likes`, {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -47,7 +48,7 @@ function addCardLike(_id, token) {
 }
 
 function removeCardLike(_id, token) {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
+  return fetch(`${baseUrl}/items/${_id}/likes`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,

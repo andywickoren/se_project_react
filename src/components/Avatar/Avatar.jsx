@@ -3,14 +3,25 @@ import "./Avatar.css";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function Avatar({ sizeClass }) {
-  const { name, avatar } = useContext(CurrentUserContext);
-  const avatarClass = sizeClass ? sizeClass : "";
+  const { currentUser } = useContext(CurrentUserContext);
+  const avatarClass = sizeClass || ""; // Default to an empty string if no sizeClass is provided
 
-  return avatar ? (
-    <img src={avatar} alt={name} className={`avatar__image ${avatarClass}`} />
-  ) : (
-    <div className={`avatar__letter ${avatarClass}`}>
-      {name?.charAt(0).toUpperCase()}
+  // Determine whether an avatar exists
+  const hasAvatar = currentUser.avatar && currentUser.avatar !== "";
+
+  return (
+    <div className={`avatar ${avatarClass}`}>
+      {hasAvatar ? (
+        <img
+          src={currentUser.avatar}
+          alt={`${currentUser.name}'s avatar`}
+          className={`avatar__image ${avatarClass}`}
+        />
+      ) : (
+        <div className={`avatar__circle ${avatarClass}`}>
+          {currentUser.name?.charAt(0).toUpperCase()}
+        </div>
+      )}
     </div>
   );
 }

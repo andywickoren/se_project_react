@@ -13,16 +13,17 @@ function Header({
   handleAddClick,
   isLoggedIn,
   weatherData,
-  currentUser,
+  // currentUser,
 }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
-  const { name } = useContext(CurrentUserContext);
+
+  const { currentUser } = useContext(CurrentUserContext);
 
   // console.log("*******************************");
-  // console.log(isLoggedIn);
+  // console.log(currentUser);
   return (
     <header className="header">
       <div className="header__left">
@@ -61,7 +62,7 @@ function Header({
             >
               + Add Item
             </button>
-            <Link to="/profile">
+            <Link to="/profile" className="header__link">
               <div className="header__user-container">
                 <p className="header__username">{currentUser.name}</p>
                 <Avatar sizeClass="avatar-small" />

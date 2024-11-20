@@ -13,6 +13,8 @@ import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperature
 import Profile from "../Profile/Profile";
 import { getItems } from "../../utils/api";
 import { addItem } from "../../utils/api";
+import { addCardLike } from "../../utils/api";
+import { removeCardLike } from "../../utils/api";
 import { deleteItem } from "../../utils/api";
 import * as auth from "../../utils/auth";
 import { setToken, getToken, removeToken } from "../../utils/token";
@@ -61,9 +63,9 @@ function App() {
       .authorize(data)
       .then((res) => {
         if (res.token) {
-          console.log(res.token);
+          console.log(">>LOGIN", res);
           setToken(res.token);
-          setCurrentUser(res.user);
+          auth.getUserInfo(res.token).then((user) => setCurrentUser(user));
           setIsLoggedIn(true);
           closeActiveModal();
         }
@@ -71,12 +73,13 @@ function App() {
       .catch(console.error);
   };
 
-  const onEditProfile = () => {
+  //HERE -----
+  const onEditProfile = (data) => {
     const token = localStorage.getItem("jwt");
     auth
       .editProfile(data, token)
-      .then((res) => {
-        setCurrentUser(res.data);
+      .then(() => {
+        auth.getUserInfo(token).then((user) => setCurrentUser(user));
         closeActiveModal();
       })
       .catch(console.error);
@@ -139,25 +142,19 @@ function App() {
 
   const [clothingItems, setClothingItems] = useState([]);
 
-  const handleCardLike = ({ _id, isLiked }) => {
+  const handleCardLike = (_id, isLiked) => {
     const token = localStorage.getItem("jwt");
-    !isLiked
-      ? api
-          .addCardLike(_id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.log(err))
-      : api
-          .removeCardLike(_id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item))
-            );
-          })
-          .catch((err) => console.log(err));
+    return !isLiked
+      ? addCardLike(_id, token).then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === id ? updatedCard : item))
+          );
+        })
+      : removeCardLike(_id, token).then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === id ? updatedCard : item))
+          );
+        });
   };
 
   const handleDelete = (item) => {
@@ -274,15 +271,14 @@ function App() {
               <ItemModal
                 card={selectedCard}
                 handleCloseClick={closeActiveModal}
-                deleteItemClick={handleDeleteClick}
+                handleDeleteClick={handleDeleteClick}
               />
             )}
             {activeModal === "confirm-delete" && (
               <ConfirmDeleteModal
                 card={selectedCard}
                 handleCloseClick={closeActiveModal}
-                deleteItemClick={handleDeleteClick}
-                deleteItem={() => handleDelete(selectedCard)}
+                handleDelete={() => handleDelete(selectedCard)}
               />
             )}
             {activeModal === "register" && (
@@ -305,7 +301,7 @@ function App() {
                 isOpen={activeModal === "login"}
                 onClose={closeActiveModal}
                 onLogin={onLogin}
-                onSignup={handleSignUpClick}
+                onRegister={handleSignUpClick}
               />
             )}
           </div>
