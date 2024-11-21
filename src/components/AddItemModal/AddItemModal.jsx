@@ -12,6 +12,7 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
 
   const handleAddItemSubmit = (e) => {
     e.preventDefault();
+    console.log(values);
     onAddItem(values);
   };
 
@@ -86,11 +87,7 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
         </label>
       </fieldset>
       <div className="modal__buttons-wrapper">
-        <button
-          type="submit"
-          className="modal__submit"
-          onClick={handleAddItemSubmit}
-        >
+        <button type="submit" className="modal__submit">
           Add
         </button>
       </div>

@@ -174,8 +174,8 @@ function App() {
   const handleAddItem = (newItem) => {
     const jwt = localStorage.getItem("jwt");
     return addItem(newItem, jwt)
-      .then((savedItem) => {
-        setClothingItems([savedItem, ...clothingItems]);
+      .then(({ data }) => {
+        setClothingItems([...clothingItems, data]);
         closeActiveModal();
       })
       .catch((err) => {
