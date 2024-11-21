@@ -13,19 +13,18 @@ function LoginModal({ isOpen, onLogin, onClose, onRegister }) {
     }));
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   onRegister({ email: formData.email, password: formData.password });
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onLogin({ email: formData.email, password: formData.password });
+  };
 
   return (
     <ModalWithForm
-      titleText="Log in"
-      buttonText="Log in"
-      handleCloseClick={onClose}
+      // titleText="Log in"
+      // buttonText="Log in"
       isOpen={isOpen}
-      name={"login"}
-      // onSubmit={handleSubmit}
+      // name={"login"}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="email" className="modal__label">
         Email
