@@ -1,5 +1,7 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import React, { useState } from "react";
+import "./register";
+import "./RegisterModal.css";
 // import { useState } from "react";
 // import { useForm } from "../../hooks/useForm/";
 
