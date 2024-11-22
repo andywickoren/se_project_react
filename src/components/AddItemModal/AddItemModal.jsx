@@ -1,25 +1,35 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm/";
+import { useState } from "react";
 const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
   const { values, handleChange, setValues } = useForm({
     name: "",
     imageUrl: "",
     weather: "",
   });
+
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleWeatherType = (e) => {
     setValues({ ...values, weather: e.target.id });
   };
 
-  const handleAddItemSubmit = (e) => {
+  const handleAddItemSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
-    onAddItem(values);
+    setIsLoading(true);
+    try {
+      await onAddItem(values);
+      console.log("Item added successfully!");
+    } catch (error) {
+      console.error("Error adding item:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
     <ModalWithForm
       title="New garment"
-      buttonText="Add garment"
       handleCloseClick={closeActiveModal}
       isOpen={isOpen}
       onSubmit={handleAddItemSubmit}
@@ -87,8 +97,8 @@ const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
         </label>
       </fieldset>
       <div className="modal__buttons-wrapper">
-        <button type="submit" className="modal__submit">
-          Add
+        <button type="submit" className="modal__submit" disabled={isLoading}>
+          {isLoading ? "Saving..." : "Add"}
         </button>
       </div>
     </ModalWithForm>

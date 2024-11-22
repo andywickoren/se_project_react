@@ -4,6 +4,7 @@ import "./LoginModal.css";
 
 function LoginModal({ isOpen, onLogin, onClose, onRegister }) {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -13,9 +14,16 @@ function LoginModal({ isOpen, onLogin, onClose, onRegister }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onLogin({ email: formData.email, password: formData.password });
+    setIsLoading(true);
+    try {
+      await onLogin({ email: formData.email, password: formData.password });
+    } catch (error) {
+      console.error("Login failed:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -55,8 +63,9 @@ function LoginModal({ isOpen, onLogin, onClose, onRegister }) {
           type="submit"
           className="modal__submit modal__login-btn"
           onSubmit={onLogin}
+          disabled={isLoading}
         >
-          Log In
+          {isLoading ? "Logging in..." : "Log In"}
         </button>
         <button
           type="button"

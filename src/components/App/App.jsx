@@ -41,7 +41,6 @@ function App() {
     _id: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
 
   const handleRegistration = (data) => {
     console.log("made it into resgistration");
@@ -118,10 +117,6 @@ function App() {
     setActiveModal("add-garment");
   };
 
-  const closeActiveModal = () => {
-    setActiveModal("");
-  };
-
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
@@ -134,6 +129,23 @@ function App() {
   const handleDeleteClick = () => {
     setActiveModal("confirm-delete");
   };
+
+  const closeActiveModal = () => {
+    setActiveModal("");
+  };
+
+  useEffect(() => {
+    if (!activeModal) return;
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+    document.addEventListener("keydown", handleEscClose);
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   const handleToggleSwitchChange = () => {
     if (currentTemperatureUnit === "C") setCurrentTemperatureUnit("F");
@@ -168,7 +180,7 @@ function App() {
         );
         closeActiveModal();
       })
-      .catch((error) => console.error(error));
+      .catch(console.error);
   };
 
   const handleAddItem = (newItem) => {

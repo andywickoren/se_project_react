@@ -17,6 +17,8 @@ function RegisterModal({
     avatar: "",
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData((prevData) => ({
@@ -24,25 +26,18 @@ function RegisterModal({
       [name]: value,
     }));
   };
-  const onRegistration = (event) => {
+  const onRegistration = async (event) => {
     event.preventDefault();
-    handleRegistration(data);
+    setIsLoading(true);
+    try {
+      await handleRegistration(data);
+      console.log("Registration successful");
+    } catch (error) {
+      console.error("Registration failed:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
-
-  // const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
-  //   const { values, handleChange, setValues } = useForm({
-  //     name: "",
-  //     imageUrl: "",
-  //     weather: "",
-  //   });
-  //   const handleWeatherType = (e) => {
-  //     setValues({ ...values, weather: e.target.id });
-  //   };
-
-  //   const handleAddItemSubmit = (e) => {
-  //     e.preventDefault();
-  //     onAddItem(values);
-  //   };
 
   return (
     <ModalWithForm
@@ -103,8 +98,8 @@ function RegisterModal({
         {/* <button type="submit" className="modal__submit">
           Sign Up
         </button> */}
-        <button type="submit" className="modal__submit">
-          Next
+        <button type="submit" className="modal__submit" disabled={isLoading}>
+          {isLoading ? "Registering" : "Next"}
         </button>
         <button
           type="button"
