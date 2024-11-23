@@ -1,39 +1,17 @@
-import { useState } from "react";
+import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 
-function LoginModal({ isOpen, onLogin, onClose, onRegister }) {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+function LoginModal({ isOpen, onLogin, onRegister }) {
+  const { values, handleChange } = useForm({ email: "", password: "" });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    try {
-      await onLogin({ email: formData.email, password: formData.password });
-    } catch (error) {
-      console.error("Login failed:", error);
-    } finally {
-      setIsLoading(false);
-    }
+    onLogin(values);
   };
 
   return (
-    <ModalWithForm
-      // titleText="Log in"
-      // buttonText="Log in"
-      isOpen={isOpen}
-      // name={"login"}
-      onSubmit={handleSubmit}
-    >
+    <ModalWithForm isOpen={isOpen} onSubmit={handleSubmit}>
       <label htmlFor="email" className="modal__label">
         Email
       </label>
@@ -43,8 +21,8 @@ function LoginModal({ isOpen, onLogin, onClose, onRegister }) {
         id="email"
         name="email"
         placeholder="Email"
-        value={formData.email}
-        onChange={handleInputChange}
+        value={values.email}
+        onChange={handleChange}
       />
       <label htmlFor="password" className="modal__label">
         Password
@@ -55,17 +33,18 @@ function LoginModal({ isOpen, onLogin, onClose, onRegister }) {
         id="password"
         name="password"
         placeholder="Password"
-        value={formData.password}
-        onChange={handleInputChange}
+        value={values.password}
+        onChange={handleChange}
       />
       <div className="modal__buttons-wrapper">
         <button
           type="submit"
           className="modal__submit modal__login-btn"
           onSubmit={onLogin}
-          disabled={isLoading}
+          // disabled={isLoading}
         >
-          {isLoading ? "Logging in..." : "Log In"}
+          {/* {isLoading ? "Logging in..." : "Log In"} */}
+          Login
         </button>
         <button
           type="button"

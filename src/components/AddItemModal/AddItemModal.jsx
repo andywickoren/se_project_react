@@ -1,30 +1,19 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm/";
-import { useState } from "react";
-const AddItemModal = ({ closeActiveModal, onAddItem, isOpen }) => {
+const AddItemModal = ({ closeActiveModal, onAddItem, isOpen, isLoading }) => {
   const { values, handleChange, setValues } = useForm({
     name: "",
     imageUrl: "",
     weather: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-
   const handleWeatherType = (e) => {
     setValues({ ...values, weather: e.target.id });
   };
 
-  const handleAddItemSubmit = async (e) => {
+  const handleAddItemSubmit = (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    try {
-      await onAddItem(values);
-      console.log("Item added successfully!");
-    } catch (error) {
-      console.error("Error adding item:", error);
-    } finally {
-      setIsLoading(false);
-    }
+    onAddItem(values);
   };
 
   return (

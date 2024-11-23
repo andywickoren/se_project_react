@@ -41,16 +41,7 @@ function App() {
     _id: "",
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleRegistration = (data) => {
-    console.log("made it into resgistration");
-    auth
-      .register(data)
-      .then(() => {
-        onLogin(data);
-      })
-      .catch(console.error);
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
   const onLogin = (data) => {
     if (!email || !password) {
@@ -68,18 +59,6 @@ function App() {
           setIsLoggedIn(true);
           closeActiveModal();
         }
-      })
-      .catch(console.error);
-  };
-
-  //HERE -----
-  const onEditProfile = (data) => {
-    const token = localStorage.getItem("jwt");
-    auth
-      .editProfile(data, token)
-      .then(() => {
-        auth.getUserInfo(token).then((user) => setCurrentUser(user));
-        closeActiveModal();
       })
       .catch(console.error);
   };
@@ -102,7 +81,6 @@ function App() {
   useEffect(() => {
     console.log("isLoggedIn:", isLoggedIn);
     console.log("currentUser:", currentUser);
-    // console.log("weatherData:", weatherData);
   }, [isLoggedIn, currentUser, weatherData]);
 
   const handleSignUpClick = () => {
@@ -183,16 +161,46 @@ function App() {
       .catch(console.error);
   };
 
-  const handleAddItem = (newItem) => {
-    const jwt = localStorage.getItem("jwt");
-    return addItem(newItem, jwt)
-      .then(({ data }) => {
-        setClothingItems([...clothingItems, data]);
+  function handleSubmit(request, setIsLoading) {
+    setIsLoading(true);
+    request()
+      .then(() => {
         closeActiveModal();
       })
       .catch((err) => {
-        console.error("Failed to add item:", err);
+        console.error("Error during form submission:", err);
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
+  }
+
+  const handleRegistration = (data) => {
+    const makeRequest = () => {
+      return auth.register(data).then(() => onLogin(data));
+    };
+    handleSubmit(makeRequest, setIsLoading);
+  };
+
+  const handleAddItem = (newItem) => {
+    const makeRequest = () => {
+      const jwt = localStorage.getItem("jwt");
+      return addItem(newItem, jwt).then(({ data }) => {
+        setClothingItems([data, ...clothingItems]);
+      });
+    };
+    handleSubmit(makeRequest, setIsLoading);
+  };
+
+  const onEditProfile = (data) => {
+    const makeRequest = () => {
+      const token = localStorage.getItem("jwt");
+      return auth
+        .editProfile(data, token)
+        .then(() => auth.getUserInfo(token).then(setCurrentUser));
+    };
+
+    handleSubmit(makeRequest, setIsLoading);
   };
 
   const handleLogOutClick = () => {
@@ -277,6 +285,7 @@ function App() {
                 closeActiveModal={closeActiveModal}
                 isOpen={activeModal === "add-garment"}
                 onAddItem={handleAddItem}
+                isLoading={isLoading}
               />
             )}
             {activeModal === "preview" && (
@@ -299,6 +308,7 @@ function App() {
                 handleRegistration={handleRegistration}
                 isOpen={activeModal === "register"}
                 openLoginModal={handleLoginClick}
+                isLoading={isLoading}
               />
             )}
             {activeModal === "edit-profile" && (
@@ -313,7 +323,10 @@ function App() {
                 isOpen={activeModal === "login"}
                 onClose={closeActiveModal}
                 onLogin={onLogin}
+                handleSubmit={handleSubmit}
                 onRegister={handleSignUpClick}
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
               />
             )}
           </div>

@@ -4,7 +4,6 @@ function ModalWithForm({
   children,
   title,
   handleCloseClick,
-  // closeActiveModal,
   isOpen,
   onSubmit,
 }) {

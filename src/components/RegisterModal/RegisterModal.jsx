@@ -1,42 +1,24 @@
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import React, { useState } from "react";
 import "./RegisterModal.css";
-// import { useState } from "react";
-// import { useForm } from "../../hooks/useForm/";
+import { useForm } from "../../hooks/useForm/";
 
 function RegisterModal({
   closeActiveModal,
   handleRegistration,
   isOpen,
   openLoginModal,
+  isLoading,
 }) {
-  const [data, setData] = useState({
+  const { values, handleChange } = useForm({
     email: "",
     password: "",
     name: "",
     avatar: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
-  const onRegistration = async (event) => {
-    event.preventDefault();
-    setIsLoading(true);
-    try {
-      await handleRegistration(data);
-      console.log("Registration successful");
-    } catch (error) {
-      console.error("Registration failed:", error);
-    } finally {
-      setIsLoading(false);
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleRegistration(values);
   };
 
   return (
@@ -44,7 +26,7 @@ function RegisterModal({
       title="Sign up"
       handleCloseClick={closeActiveModal}
       isOpen={isOpen}
-      onSubmit={onRegistration}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="email" className="modal__label">
         Email*
@@ -54,7 +36,7 @@ function RegisterModal({
         className="modal__input"
         id="email"
         name="email"
-        value={data.email}
+        value={values.email}
         placeholder="Email"
         onChange={handleChange}
       />
@@ -66,7 +48,7 @@ function RegisterModal({
         className="modal__input"
         id="password"
         name="password"
-        value={data.password}
+        value={values.password}
         placeholder="Password"
         onChange={handleChange}
       />
@@ -78,7 +60,7 @@ function RegisterModal({
         className="modal__input"
         id="name"
         name="name"
-        value={data.name}
+        value={values.name}
         placeholder="Name"
         onChange={handleChange}
       />
@@ -90,7 +72,7 @@ function RegisterModal({
         className="modal__input"
         id="avatar"
         name="avatar"
-        value={data.avatar}
+        value={values.avatar}
         placeholder="Avatar URL"
         onChange={handleChange}
       />
