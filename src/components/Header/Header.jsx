@@ -1,7 +1,6 @@
 import "./Header.css";
 import ToggleSwitch from "../../components/ToggleSwitch/ToggleSwitch";
 import logo from "../../assets/logo.svg";
-// import avatar from "../../assets/avatar.png";
 import { Link } from "react-router-dom";
 import Avatar from "../Avatar/Avatar";
 import { useContext } from "react";
@@ -13,7 +12,6 @@ function Header({
   handleAddClick,
   isLoggedIn,
   weatherData,
-  // currentUser,
 }) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
@@ -22,8 +20,6 @@ function Header({
 
   const { currentUser } = useContext(CurrentUserContext);
 
-  // console.log("*******************************");
-  // console.log(currentUser);
   return (
     <header className="header">
       <div className="header__left">

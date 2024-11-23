@@ -2,7 +2,7 @@ import { useForm } from "../../hooks/useForm";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import "./LoginModal.css";
 
-function LoginModal({ isOpen, onLogin, onRegister }) {
+function LoginModal({ isOpen, onLogin, onRegister, onClose }) {
   const { values, handleChange } = useForm({ email: "", password: "" });
 
   const handleSubmit = async (e) => {
@@ -11,7 +11,11 @@ function LoginModal({ isOpen, onLogin, onRegister }) {
   };
 
   return (
-    <ModalWithForm isOpen={isOpen} onSubmit={handleSubmit}>
+    <ModalWithForm
+      isOpen={isOpen}
+      onSubmit={handleSubmit}
+      handleCloseClick={onClose}
+    >
       <label htmlFor="email" className="modal__label">
         Email
       </label>
@@ -37,13 +41,7 @@ function LoginModal({ isOpen, onLogin, onRegister }) {
         onChange={handleChange}
       />
       <div className="modal__buttons-wrapper">
-        <button
-          type="submit"
-          className="modal__submit modal__login-btn"
-          onSubmit={onLogin}
-          // disabled={isLoading}
-        >
-          {/* {isLoading ? "Logging in..." : "Log In"} */}
+        <button type="submit" className="modal__submit modal__login-btn">
           Login
         </button>
         <button

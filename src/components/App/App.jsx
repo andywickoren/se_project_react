@@ -246,7 +246,6 @@ function App() {
               handleAddClick={handleAddClick}
               isLoggedIn={isLoggedIn}
               weatherData={weatherData}
-              currentUser={currentUser}
             />
 
             <Routes>
@@ -326,7 +325,6 @@ function App() {
                 handleSubmit={handleSubmit}
                 onRegister={handleSignUpClick}
                 isLoading={isLoading}
-                setIsLoading={setIsLoading}
               />
             )}
           </div>
