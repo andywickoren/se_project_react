@@ -77,9 +77,6 @@ function RegisterModal({
         onChange={handleChange}
       />
       <div className="modal__buttons-wrapper">
-        {/* <button type="submit" className="modal__submit">
-          Sign Up
-        </button> */}
         <button type="submit" className="modal__submit" disabled={isLoading}>
           {isLoading ? "Registering" : "Next"}
         </button>

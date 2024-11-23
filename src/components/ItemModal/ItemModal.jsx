@@ -4,7 +4,6 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ItemModal({ card, handleCloseClick, handleDeleteClick }) {
   const { currentUser } = useContext(CurrentUserContext);
-  // console.log("*********************************");
   console.log(`{Card Owner: ${card.owner}`);
   console.log(`{Current User: ${currentUser._id}`);
   console.log("Current User:", currentUser);
